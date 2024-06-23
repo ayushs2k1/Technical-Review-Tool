@@ -1,0 +1,33 @@
+<%- include("partials/header.ejs") %>
+<div class="view-changes-body">
+   <div class="view-changes-header">
+      <span id="view-changes-title">
+         <%= review.name %>
+      </span>
+      <span id="view-changes-createdAt">
+         <%= review.createdAt %>
+      </span>
+      <p><strong>Not Acknowledged</strong></p>
+      <p><strong>Comment</strong></p>
+      <p><strong>Panel Member:</strong>
+         <%= comment.name %>
+      </p>
+      <label for="comment"><strong>Comment</strong></label>
+      <input type="text" class="comment" value="<%= comment.comment.comment %>" readonly>&nbsp;&nbsp;&nbsp;
+      <label for="severity"><strong>Severity</strong></label>
+      <input type="number" class="severity" value="<%= comment.comment.severity %>" readonly>
+   </div>
+   <br>
+   <div class="dev-log">
+      <h5><strong>Developer Log</strong></h5>
+      <p style="background:white; width:300px;height:100px">
+         <%= comment.comment.changeDesc %>
+      </p>
+      <p style="background:white;width:300px;">
+         <%= comment.comment.commitLink %>
+      </p>
+   </div>
+</div>
+   
+
+<%- include("partials/footer.ejs") %>

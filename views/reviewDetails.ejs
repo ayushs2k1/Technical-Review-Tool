@@ -1,0 +1,42 @@
+<%- include("partials/header.ejs") %>
+
+    <% if(error!="none" ){ %>
+        <div class="alert alert-primary fade show alert-dismissible" role="alert"
+            style="width:600px;position:absolute;margin:20px 450px;">
+            <%= error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <script>
+                setTimeout(function () { $('.alert').alert('close'); }, 2000);
+            </script>
+        </div>
+    <% } %>
+    <div class="review-details-header">
+        <h3 style="font-weight: 1000;"><%= review.name %></h3>
+        <h6 style="font-weight:600"><%= review.createdAt %></h6>
+    </div>
+    <div class="review-details-body">
+        <div class="review-details-col1">
+            <p id="review-details-comment-text">Comments</p>
+            <% for(let i=0;i<5;i++){ %>
+                <p class="reviewDetails-panelMember-name"><%= review.panelMembers[i].name %></p>
+                <input style="border:none;height:30px" type="text" class="comment" value="<%= review.panelMembers[i].comment.comment %>" readonly>
+                <input style="color:#696969;width:90px; border:none;height:30px;" type="text" class="severity" value="Severity: <%= review.panelMembers[i].comment.severity %>" readonly><br>
+                <% if(review.panelMembers[i].comment.status==="Not Acknowledged" ){ %>
+                    <p style="margin:0;color: #fd5d5d">Not Acknowledged</p>
+                    <a href="/addChanges/<%= review._id %>/<%= i %>" style="background:blueviolet;color:white;border-radius:10px;padding:3px; font-size:11px;">Change Status </a>
+                <% }else{ %>
+                    <a href="/viewChanges/<%= review._id %>/<%= i %>" style="color:#2dc7b6">Acknowledged</a>
+                <% } %>
+            <% } %> 
+        </div>
+        <div class="review-details-col2">
+            <p id="review-details-objective-text">Objective</p>
+            <p style="margin-left:10px;"><%= review.objective %></p> 
+        </div>
+        
+    </div>
+
+
+<%- include("partials/footer.ejs") %>

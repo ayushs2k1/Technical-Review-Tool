@@ -1,0 +1,47 @@
+<%- include("partials/header.ejs") %>
+<style>
+    body{
+        background-color: white;
+    }
+</style>
+<% if(error!="none" ){ %>
+    <div class="alert alert-primary fade show alert-dismissible" role="alert"
+        style="width:600px;position:absolute;margin:20px 450px;z-index: 100;">
+        <%= error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <script>
+                setTimeout(function () { $('.alert').alert('close'); }, 2000);
+            </script>
+    </div>
+<% } %>
+<div class="reviews-container row">
+    <% for(let i=0;i<reviews.length;i++){ %>
+        <div class="card col-lg-4">
+            <a href="/reviews/<%= reviews[i]._id %>" class="review-link">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= reviews[i].name %>
+                    </h5>
+                    <p class="card-text">
+                        <%= reviews[i].objective %>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <%= reviews[i].createdAt %>
+                </div>
+            </a>
+        </div>  
+    <% } %>
+</div>
+
+
+<!---Conduct review button--->
+<div class="conduct-review-btn">
+    <form action="/reviewForm">
+        <button class="btn btn-success">Conduct a Review</button>
+    </form>
+</div>
+
+<%- include("partials/footer.ejs") %>
